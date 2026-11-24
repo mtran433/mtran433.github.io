@@ -8,9 +8,9 @@
   .v2 { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #111; background: #fff; }
   .v2 * { box-sizing: border-box; }
   .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 30px; background: #0a0a0a; color: #f5f5f5;  border-bottom: 1px solid #2b2b2b; }
-  .copy-btn { appearance: none; border: 1px solid #3d3d3d; background: transparent; color: #bdbdbd; font: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; cursor: pointer; vertical-align: 2px; margin-left: 6px; transition: color 0.2s ease, border-color 0.2s ease; }
-  .copy-btn:hover { color: #e2483a; border-color: #e2483a; }
-  .copy-btn.copied { color: #7bc47f; border-color: #7bc47f; }
+  .copy-btn { appearance: none; border: 0; background: transparent; color: #9a9a9a; padding: 2px; margin-left: 5px; cursor: pointer; vertical-align: -2px; line-height: 0; opacity: 0.75; transition: color 0.2s ease, opacity 0.2s ease; }
+  .copy-btn:hover { color: #e2483a; opacity: 1; }
+  .copy-btn.copied { color: #7bc47f; opacity: 1; }
   .nav .brand { cursor: pointer; }
   .nav .brand .bname { font-size: 15px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; display: block; line-height: 1.2; }
   .brand .bname { transition: color 0.25s ease; }
@@ -262,7 +262,7 @@
 
     <section class="band black" id="contact">
       <p class="eyebrow2">Contact</p>
-      <p class="foot">mtran0433@gmail.com <button class="copy-btn" id="copy-email" type="button">Copy</button> &middot; <a href="https://www.linkedin.com/in/mtran433" target="_blank" rel="noopener">linkedin.com/in/mtran433</a></p>
+      <p class="foot">mtran0433@gmail.com <button class="copy-btn" id="copy-email" type="button" title="Copy email" aria-label="Copy email"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button> &middot; <a href="https://www.linkedin.com/in/mtran433" target="_blank" rel="noopener">linkedin.com/in/mtran433</a></p>
     </section>
   </div>
 
@@ -655,10 +655,12 @@
     var copyBtn = document.getElementById("copy-email");
     copyBtn.addEventListener("click", function () {
       var email = "mtran0433@gmail.com";
+      var copyIcon = copyBtn.innerHTML;
+      var checkIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>';
       function done() {
-        copyBtn.textContent = "Copied";
+        copyBtn.innerHTML = checkIcon;
         copyBtn.classList.add("copied");
-        setTimeout(function () { copyBtn.textContent = "Copy"; copyBtn.classList.remove("copied"); }, 1600);
+        setTimeout(function () { copyBtn.innerHTML = copyIcon; copyBtn.classList.remove("copied"); }, 1600);
       }
       function fallback() {
         var ta = document.createElement("textarea");
